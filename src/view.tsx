@@ -3,8 +3,13 @@ const App  = replay => props => {
   return (<>
    <vchessreplay>
      <moves>
-       <For each={replay.moves}>{ move =>
-         <Move move={move}/>
+       <For each={replay.tree}>{ node =>
+         <>
+         <Move move={{}}/>
+         <For each={console.log(node.m_cs())||node.m_cs()}>{ child =>
+           <Move move={{}}/>
+         }</For>
+         </>
        }</For>
      </moves>
    </vchessreplay> 
