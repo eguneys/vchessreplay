@@ -44,6 +44,12 @@ moves move {
    color: #bababa;
 }
 
+moves move.hi {
+  background: #505089;
+  color: white;
+  border-radius: 4px;
+}
+
 moves move index {
   padding-right: 0.2em;
   line-height: 111.11%;

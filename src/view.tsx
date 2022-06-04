@@ -54,7 +54,7 @@ const MainChildrenAndRest = props => {
 }
 
 const Move = props => {
-  return (<><move onMouseOver={_ => props.on_hover(props.a_move.path)}>
+  return (<><move class={props.hi?'hi':''} onMouseOver={_ => props.on_hover(props.a_move.path)}>
       <Show when={props.show_index}>
         <index>{props.index}</index>
       </Show>

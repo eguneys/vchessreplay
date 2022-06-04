@@ -106,7 +106,15 @@ const make_moves = () => {
 
         let show_index = is_branch || !i_continue
 
+        let _hi = createSignal(false)
+
         return {
+          set hi(v: boolean) {
+            owrite(_hi, v)
+          },
+          get hi() {
+            return read(_hi)
+          },
           a_move,
           index,
           show_index,
@@ -118,12 +126,34 @@ const make_moves = () => {
 
   let m_tree = make_nodes('')
 
+  function node_hi(node: Array<Node>, path: string) {
+
+    if (path.slice(0, node.a_move.path.length) === node.a_move.path) {
+      node.hi = true
+    }
+    if (node.main_children_and_rest) {
+      node_hi(node.main_children_and_rest[0], path)
+      node.main_children_and_rest[1].forEach(_ => node_hi(_, path))
+    }
+  }
+
+  function node_off(node: Array<Node>) {
+    node.hi = false
+    if (node.main_children_and_rest) {
+      node_off(node.main_children_and_rest[0])
+      node.main_children_and_rest[1].forEach(_ => node_off(_))
+    }
+  }
+
+
   return {
     hover_path(path: string) {
-      console.log(path)
+
+      m_tree().forEach(_ => node_off(_))
+      m_tree().forEach(_ => node_hi(_, path))
     },
     hover_off() {
-      console.log('off')
+      m_tree().forEach(_ => node_off(_))
     },
     get tree() {
       return m_tree()
