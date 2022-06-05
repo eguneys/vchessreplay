@@ -14,6 +14,7 @@ export class Replay {
   constructor() {
     this.a_moves = make_moves()
 
+      /*
 
     this.moves = [
       'd4 d4',
@@ -50,6 +51,7 @@ export class Replay {
       'd4d5f4c5e3b6c3e6f3c4b3b5b1d7 Qd7',
       'd4d5f4c5e3b6c3e6f3c4b3b5b1d7e5 Ne5',
     ]
+       */
   }
 }
 

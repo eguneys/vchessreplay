@@ -11,5 +11,8 @@ export default function VChessreplay(element: HTMLElement, options = {}) {
   render(App(replay), element)
 
   return {
+    set moves(moves: Array<Move>) {
+      replay.moves = moves
+    }
   }
 }
