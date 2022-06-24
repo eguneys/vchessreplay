@@ -7,7 +7,7 @@ import { Replay } from './replay'
 
 export default function VChessreplay(element: HTMLElement, options = {}) {
 
-  let replay = new Replay()
+  let replay = new Replay(_ => options.on_hover?.(_))
   render(App(replay), element)
 
   return {

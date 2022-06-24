@@ -11,8 +11,14 @@ export class Replay {
     this.a_moves.moves = moves
   }
 
-  constructor() {
-    this.a_moves = make_moves()
+  constructor(on_hover) {
+    this.a_moves = make_moves(this)
+
+    createEffect(() => {
+      let path = read(this.a_moves._hover_path)
+
+      on_hover(path)
+    })
 
       /*
 
@@ -80,7 +86,10 @@ const make_move = (_path: string) => {
   }
 }
 
-const make_moves = () => {
+const make_moves = (replay: Replay) => {
+
+  let _hover_path = createSignal(undefined, { equals: false })
+
   let _moves = createSignal([])
 
   let a_moves = createMemo(mapArray(_moves[0], make_move))
@@ -149,10 +158,15 @@ const make_moves = () => {
 
 
   return {
+    get _hover_path() {
+      return _hover_path
+    },
     hover_path(path: string) {
 
       m_tree().forEach(_ => node_off(_))
       m_tree().forEach(_ => node_hi(_, path))
+
+      owrite(_hover_path, _ => path)
     },
     hover_off() {
       m_tree().forEach(_ => node_off(_))
